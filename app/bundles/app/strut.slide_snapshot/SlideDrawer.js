@@ -37,8 +37,8 @@ define(['strut/deck/Utils'],
 					'scale(' + this.scale.x + ',' + this.scale.y + ')');
 			},
 
-			applyBackground: function(model, deck, opts) {
-				DeckUtils.applyBackground(this.$el, model, deck, opts);
+			applyBackground: function(bg) {
+				DeckUtils.applyBackground(this.$el, bg);
 			},
 
 			dispose: function() {

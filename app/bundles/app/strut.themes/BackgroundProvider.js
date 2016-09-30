@@ -46,24 +46,12 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 		},
 
 		_previewBackground: function(e) {
-			var $container = $(this._selector);
-			if ($container.length == 0)
-				return;
-			
-			var klass = e.currentTarget.dataset['class'];
-			if (klass == null) return;
-			if (klass == 'bg-img' || klass == 'bg-custom') return;
+			var bg = e.currentTarget.dataset['class'];
+			var allSlides = $(e.currentTarget).parent().parent().is('.allSlides');
+			if (bg == null) return;
+			if (bg == 'bg-img' || bg == 'bg-custom') return;
 
-			if (klass == 'bg-default') {
-				if (this._attr == 'Background') {
-					if ($(e.currentTarget).parent().parent().is('.allSlides')) {
-						klass = this._editorModel.deck().slideSurface();
-					} else {
-						klass = DeckUtils.slideBackground(null, this._editorModel.deck(), {transparentForSurface: true, surfaceForDefault: true});
-					}
-				}
-			}
-			this._swapBg($container, klass);
+			this._swapBg(allSlides, bg);
 		},
 
 		_setBackground: function(e) {
@@ -85,6 +73,8 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 			}
 
 			this._setBgClass(allSlides, bg);
+			
+			delete this._realBg;
 		},
 
 		_setCustomBgColor: function(allSlides, color) {
@@ -93,16 +83,17 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 		},
 
 		_setBgClass: function(allSlides, bg) {
-			if (bg == null)
-				return;
-
-			var attr = this._attr.substring(0,1).toLowerCase() + this._attr.substring(1);
 			var obj = this._pickObj(allSlides);
 
 			if (bg == '')
 				bg = undefined;
 
-			obj.set(attr, bg);
+			obj.set(this._attr, bg);
+		},
+		
+		_getBgClass: function(allSlides, bg) {
+			var obj = this._pickObj(allSlides);
+			return obj.get(this._attr);
 		},
 
 		_pickObj: function(allSlides) {
@@ -115,52 +106,22 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 
 		_setBackgroundImage: function(allSlides, src) {
 			var obj = this._pickObj(allSlides);
-			// TODO: we really have to fix this bastard.
-			if (this._attr == 'Background') {
-				obj.set('background', 'img:' + src);
-			} else {
-				obj.set('surface', 'img:' + src);
-			}
+			obj.set(this._attr, 'img:' + src);
 		},
 
 		_restoreBackground: function(e) {
-			// ugh...
-			var bg;
-			if (this._attr == 'Background')
-				bg = DeckUtils.slideBackground(this._editorModel.activeSlide(),
-					this._editorModel.deck(), {transparentForSurface: true, surfaceForDefault: true});
-
-			if (bg == null) {
-				// ugh... there should be no visibility into modes from here.
-				if (this._editorModel.get('modeId') != 'slide-editor') {
-					bg = DeckUtils.slideSurface(null, this._editorModel.deck());
-				} else {
-					bg = DeckUtils.slideSurface(this._editorModel.activeSlide(), this._editorModel.deck());
-				}
-			}
-			var $container = $(this._selector);
-			if ($container.length == 0)
-				return;
-			if (DeckUtils.isImg(bg)) {
-				this._removeLastBg($container);
-			} else {
-				this._swapBg($container, bg);
+			var allSlides = $(e.currentTarget).parent().parent().is('.allSlides');
+			if (this.hasOwnProperty('_realBg')) {
+				this._setBgClass(allSlides, this._realBg);
+				delete this._realBg;
 			}
 		},
 
-		_removeLastBg: function($el) {
-			if (!this._lastBg) {
-				this._lastBg = DeckUtils.getCurrentBackground($el);
+		_swapBg: function(allSlides, newBg) {
+			if(!this.hasOwnProperty('_realBg')) {
+				this._realBg = this._getBgClass(allSlides);
 			}
-			if (this._lastBg) {
-				$el.removeClass(this._lastBg);
-			}
-		},
-
-		_swapBg: function($el, newBg) {
-			this._removeLastBg($el);
-			this._lastBg = newBg;
-			$el.addClass(newBg);
+			this._setBgClass(allSlides, newBg);
 		},
 
 		dispose: function() {

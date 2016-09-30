@@ -15,14 +15,6 @@ define(function() {
 			return result;
 		},
 
-		isImg: function(bg) {
-			return bg && bg.indexOf('img:') == 0;
-		},
-
-		getImgUrl: function(bg) {
-			return 'url(' + bg.substring(4) + ')';
-		},
-
 		/**
 		 * TODO: simplify me!
 		 *
@@ -71,12 +63,6 @@ define(function() {
 			return $el.attr('class').match(/bg-[^ ]+/g);
 		},
 
-		getCurrentBackground: function($el) {
-			var bg = this.getCurrentBackgrounds($el);
-			if (bg)
-				return bg[0];
-		},
-
 		removeCurrentBackground: function($el) {
 			var bgs = this.getCurrentBackgrounds($el);
 			if (bgs) {
@@ -88,10 +74,9 @@ define(function() {
 			return bgs;
 		},
 
-		applyBackground: function($el, slide, deck, opts) {
+		applyBackground: function($el, bg) {
 			this.removeCurrentBackground($el);
-			var bg = this.slideBackground(slide, deck, opts);
-			if (bg.indexOf('img:') == 0) {
+			if (bg && bg.indexOf('img:') == 0) {
 				$el.css('background-image', 'url(' + bg.substring(4) + ')');
 			} else {
 				$el.css('background-image', '');

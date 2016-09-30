@@ -47,13 +47,7 @@ define(['libs/backbone',
 			 * @private
 			 */
 			_surfaceChanged: function(deck, surface) {
-				if (DeckUtils.isImg(surface)) {
-					this.$el.css('background-image', DeckUtils.getImgUrl(surface));
-				} else {
-					this.$el.css('background-image', '');
-					this.$el.removeClass();
-					this.$el.addClass('slideTable strut-surface ui-selectable ' + surface);
-				}
+				DeckUtils.applyBackground(this.$el, surface);
 			},
 
 			/**

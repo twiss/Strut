@@ -93,7 +93,7 @@ define(['libs/backbone',
 			 * @private
 			 */
 			_bgChanged: function() {
-				this._slideDrawer.applyBackground(this.model, this.options.deck, {surfaceForDefault: true});
+				this._slideDrawer.applyBackground(DeckUtils.slideBackground(this.model, this.options.deck, {surfaceForDefault: true}));
 				// this.$el.css('background-image', bg.styles[0]);
 				// this.$el.css('background-image', bg.styles[1]);
 			},

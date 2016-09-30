@@ -12,7 +12,7 @@ function(BackgroundProvider, Backgrounds, Surfaces, StylesheetProvider, ClassEdi
 				backgrounds: Backgrounds,
 				editorModel: editorModel,
 				selector: '.operatingTable .slideContainer',
-				attr: 'Background',
+				attr: 'background',
 				template: JST['strut.themes/BackgroundChooserDropdown']
 			});
 		}
@@ -24,7 +24,7 @@ function(BackgroundProvider, Backgrounds, Surfaces, StylesheetProvider, ClassEdi
 				backgrounds: Surfaces,
 				editorModel: editorModel,
 				selector: '.strut-surface',
-				attr: 'Surface',
+				attr: 'surface',
 				template: JST['strut.themes/SurfaceChooserDropdown']
 			});
 		}

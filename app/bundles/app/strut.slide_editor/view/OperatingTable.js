@@ -49,7 +49,7 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			this.$el.html(this._$slideContainer);
 			this._$slideContainer.css(config.slide.size);
 
-			DeckUtils.applyBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true, transparentForDeckSurface: true});
+			DeckUtils.applyBackground(this._$slideContainer, DeckUtils.slideBackground(this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true, transparentForDeckSurface: true}));
 			this._$markdownContent = $('<div class="markdownArea themedArea"></div>');
 			this._$slideContainer.append(this._$markdownContent);
 
@@ -70,30 +70,16 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 				self._renderContents();
 			}, 0);
 
-			this.$el.addClass((this._deck.get('surface') || 'bg-default'));
-
 			return this;
 		},
 
 		_updateBg: function(model, bg) {
 			if (!this._$slideContainer) return;
-			this._$slideContainer.removeClass();
-			this._$slideContainer.addClass('slideContainer ui-selectable');
-			DeckUtils.applyBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true});
+			DeckUtils.applyBackground(this._$slideContainer, DeckUtils.slideBackground(this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true}));
 		},
 
 		_updateSurface: function(model, bg) {
-			bg = DeckUtils.slideSurface(model, this._deck);
-			if (bg) {
-				if (!DeckUtils.isImg(bg)) {
-					this.$el.css('background-image', '');
-					this.$el.removeClass();
-					// TODO: we can do this more intelligently
-					this.$el.addClass('operatingTable strut-surface ' + bg);
-				} else {
-					this.$el.css('background-image', DeckUtils.getImgUrl(bg));
-				}
-			}
+			DeckUtils.applyBackground(this.$el, DeckUtils.slideSurface(this.model, this._deck));
 		},
 
 		// TODO: make the cut/copy/paste interfaces identical for
