@@ -50,11 +50,11 @@ define(function() {
 				result = surface;
 
 			if (result == surface && opts.transparentForSurface) {
-				result = '';
+				result = 'bg-transparent';
 			}
 
 			if (result == deck.slideSurface() && opts.transparentForDeckSurface)
-				result = '';
+				result = 'bg-transparent';
 
 			return result;
 		},
