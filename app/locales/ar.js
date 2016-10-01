@@ -33,5 +33,5 @@ define({
 		click_below: 'اضغط بالأسفل للتحميل'
 	},
 	background: 'خلفية',
-	surface: 'سطح'
+	foreground: 'Foreground'
 });

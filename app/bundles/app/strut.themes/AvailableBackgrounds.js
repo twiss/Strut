@@ -1,6 +1,6 @@
 define(['css!styles/strut.themes/backgroundClasses.css'], function() {
 	return {
-	title: 'background',
+	title: 'foreground',
 	backgrounds: [
 	// TODO: translate descriptions
 		{klass: 'bg-solid-black', description: 'Black'},

@@ -33,5 +33,5 @@ define({
 		click_below: 'Klicken sie zum Herunterladen auf das Symbol unten'
 	},
 	background: 'Hintergrund',
-	surface: 'Oberfläche'
+	foreground: 'Vordergrund'
 });
