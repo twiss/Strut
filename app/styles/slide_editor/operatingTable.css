@@ -26,12 +26,6 @@
 	outline: 1px dashed #494852;
 }
 
-.operatingTable .slideContainer:not(.bg-transparent) {
-	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
-	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
-	-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
-}
-
 .operatingTable .CodeMirror {
 	position: absolute;
 	top: 0px;

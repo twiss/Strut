@@ -235,6 +235,12 @@
   	background-repeat: no-repeat;
 }
 
+.slideContainer:not(.bg-transparent) {
+	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+}
+
 .innerBg {
 	-webkit-transition: background-color .8s ease;
 	-moz-transition: background-color .8s ease;
