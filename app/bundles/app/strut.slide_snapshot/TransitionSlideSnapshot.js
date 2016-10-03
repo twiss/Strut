@@ -97,9 +97,7 @@ define(["strut/slide_components/view/ThreeDRotatableComponentView",
 			 * React on background change.
 			 */
 			_backgroundChanged: function(deck, bg) {
-				this._$content.removeClass();
-				this._$content.addClass('content');
-				this.slideDrawer.applyBackground(this.model, this.options.deck, {transparentForDeckSurface: true, surfaceForDefault: true});
+				this.slideDrawer.applyBackground(DeckUtils.slideBackground(this.model, this.options.deck, {transparentForDeckSurface: true, surfaceForDefault: true}));
 			},
 
 			/**
@@ -123,7 +121,7 @@ define(["strut/slide_components/view/ThreeDRotatableComponentView",
 
 				var $el = this.$el.find('.slideDrawer');
 				this.slideDrawer = new SlideDrawer(this.model, $el);
-				this.slideDrawer.applyBackground(this.model, this.options.deck, {transparentForDeckSurface: true, surfaceForDefault: true});
+				this.slideDrawer.applyBackground(DeckUtils.slideBackground(this.model, this.options.deck, {transparentForDeckSurface: true, surfaceForDefault: true}));
 
 				this._impScaleChanged();
 

@@ -6,26 +6,26 @@ define(['./BackgroundProvider',
 function(BackgroundProvider, Backgrounds, Surfaces, StylesheetProvider, ClassEditor) {
 	'use strict';
 
-	var slideBgProviderFactory = {
-		create: function(editorModel) {
-			return new BackgroundProvider({
-				backgrounds: Backgrounds,
-				editorModel: editorModel,
-				selector: '.operatingTable .slideContainer',
-				attr: 'Background',
-				template: JST['strut.themes/BackgroundChooserDropdown']
-			});
-		}
-	};
-
 	var surfaceBgProviderFactory = {
 		create: function(editorModel) {
 			return new BackgroundProvider({
 				backgrounds: Surfaces,
 				editorModel: editorModel,
 				selector: '.strut-surface',
-				attr: 'Surface',
+				attr: 'surface',
 				template: JST['strut.themes/SurfaceChooserDropdown']
+			});
+		}
+	};
+
+	var slideBgProviderFactory = {
+		create: function(editorModel) {
+			return new BackgroundProvider({
+				backgrounds: Backgrounds,
+				editorModel: editorModel,
+				selector: '.operatingTable .slideContainer',
+				attr: 'background',
+				template: JST['strut.themes/BackgroundChooserDropdown']
 			});
 		}
 	};
@@ -53,7 +53,7 @@ function(BackgroundProvider, Backgrounds, Surfaces, StylesheetProvider, ClassEdi
 					},
 					overflow: false
 				}
-			}, slideBgProviderFactory);
+			}, surfaceBgProviderFactory);
 
 			registry.register({
 				interfaces: 'strut.ThemeProvider',
@@ -64,7 +64,7 @@ function(BackgroundProvider, Backgrounds, Surfaces, StylesheetProvider, ClassEdi
 					},
 					overflow: false
 				}
-			}, surfaceBgProviderFactory);
+			}, slideBgProviderFactory);
 
 			registry.register({
 				interfaces: 'strut.ThemeProvider',

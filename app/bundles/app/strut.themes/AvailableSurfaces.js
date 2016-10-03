@@ -1,6 +1,6 @@
 define(['css!styles/strut.themes/surfaceClasses.css'], function() {
 	return {
-		title: 'surface',
+		title: 'background',
 		backgrounds: [
 			{klass: 'bg-surf-grad-black'},
 			{klass: 'bg-surf-grad-light'},

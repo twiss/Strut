@@ -33,6 +33,6 @@ define({
 		click_below: 'Для этого нажмите ниже.'
 	},
 	background: 'Фон',
-	surface: 'Холст',
+	foreground: 'Foreground',
 	present: 'Present'
 });

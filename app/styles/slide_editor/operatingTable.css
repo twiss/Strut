@@ -19,10 +19,11 @@
 	-moz-transform-origin: 0 0;
 	
 	margin: 10px auto;
-	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
-	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
-	-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
 	position: relative;
+}
+
+.operatingTable .slideContainer.bg-transparent {
+	outline: 1px dashed #494852;
 }
 
 .operatingTable .CodeMirror {

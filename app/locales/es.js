@@ -33,7 +33,7 @@ define({
 		click_below: 'Haz Copiarlick abajo para descargar.'
 	},
 	background: 'Fondo',
-	surface: 'Superficie',
+	foreground: 'Foreground',
 	present: 'Present'
 });
 
