@@ -313,15 +313,18 @@
   user-select: none;
   background-color: #9f0909;
 }
-.close-btn-red-20:before {
-  content: "\D7";
+.close-btn-red-20:before,
+.close-btn-red-20:after {
   display: block;
-  text-align: center;
-  width: 20px;
+  content: '';
+  background: white;
   position: absolute;
-  top: -2px;
-  left: 0;
-  font-size: 20px;
-  line-height: 20px;
-  font-family: "Helvetica Neue", Consolas, Verdana, Tahoma, Calibri, Helvetica, Menlo, "Droid Sans", sans-serif;
+  width: 10px;
+  height: 2px;
+  top: 9px;
+  left: 5px;
+  transform: rotate(45deg);
+}
+.close-btn-red-20:after {
+  transform: rotate(-45deg);
 }

@@ -28,6 +28,10 @@ a {
   cursor: pointer;
 }
 
+.dropdown-menu {
+  min-width: 100%;
+}
+
 .dropdown-menu .shape {
   width: 42px;
   height: 42px;
