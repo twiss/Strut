@@ -1,0 +1,13 @@
+{
+	"name": "Strut Presentations",
+	"description": "Presentations",
+	"developer": {
+		"name": "tantaman",
+		"url": "https://github.com/tantaman"
+	},
+	"icons": {
+		"128": "dist/styles/img/strut-touch.png"
+	},
+	"launch_path": "/dist/index.html",
+	"window_size": "maximize"
+}
