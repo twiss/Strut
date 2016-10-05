@@ -22,6 +22,7 @@ body {
 
 .transparentPattern {
   background-image: url('img/checkerboard.png');
+  background-position: center;
 }
 
 a {

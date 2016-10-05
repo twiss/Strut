@@ -70,11 +70,39 @@ included for legacy support of old decks with the defaultbg attribute set.
 
 .nobg {
 	background: url(img/nobg.png);
-	background-size: 40px 40px;
+	background-repeat: no-repeat;
+	background-size: 24px;
+	background-position: center;
 }
 
 .themeProviders .thumbnail {
-	height: 20px;
-	width: 20px;
-	padding: 10px;
+	box-sizing: border-box;
+	height: 40px;
+	width: 40px;
+	padding: 5px;
+	border-color: transparent;
+	position: relative;
+}
+
+.themeProviders .thumbnail:hover {
+	background-image: linear-gradient(to bottom, #0088cc, #005e8e);
+}
+
+.themeProviders .thumbnail div {
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	transition: all 0.2s ease-in-out;
+}
+
+.themeProviders .thumbnail div.bg-custom,
+.themeProviders .thumbnail div.bg-img {
+	padding: 6px;
+}
+
+.themeProviders .thumbnail:hover div {
+	transition: all 0.2s step-start;
+	border-color: transparent;
 }
