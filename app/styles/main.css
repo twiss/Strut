@@ -37,7 +37,12 @@ a {
   height: 42px;
   cursor: pointer;
   display: inline-block;
-  padding: 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.dropdown-menu .shape:hover {
+  background-image: linear-gradient(to bottom, #0088cc, #005e8e);
 }
 
 /*.dropdown-menu [class*="shape-"] {
