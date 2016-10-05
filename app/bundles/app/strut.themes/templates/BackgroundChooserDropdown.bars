@@ -5,24 +5,25 @@
 	<li class="dropdown-submenu">
 		<a tabindex="-1" href="#">All Slides</a>
 		<ul class="dropdown-menu horizontalDropdown allSlides" style="min-width: 120px; width: 120px; padding: 5px">
+			<li><a class="thumbnail" data-class="bg-transparent"><div class="bg-icon"><i class="icon-remove"></i></div></a></li>
+			<li><a class="thumbnail" data-class="bg-img"><div class="bg-icon"><i class="icon-picture"></i></div></a></li>
+			<li><a class="thumbnail" data-class="bg-transparent"><div class="transparentPattern"></div></a></li>
 			{{#backgrounds}}
 			<li><a class="thumbnail" alt="{{description}}" data-class="{{klass}}"><div class="{{klass}}"></div></a></li>
 			{{/backgrounds}}
-			<li><a class="thumbnail" data-class="bg-transparent"><div class="transparentPattern"></div></a></li>
-			<li><a class="thumbnail" data-class="bg-img"><div class="bg-img"><i class="icon-picture"></i></div></a></li>
-			<li><a class="thumbnail" data-class="bg-custom"><div class="bg-custom"><i class="icon-pencil"></i></div></a></li>
+			<li><a class="thumbnail" data-class="bg-custom"><div class="bg-icon"><i class="icon-pencil"></i></div></a></li>
 		</ul>
 	</li>
 	<li class="dropdown-submenu">
 		<a tabindex="-1" href="#">Selected Slide</a>
 		<ul class="dropdown-menu horizontalDropdown" style="min-width: 120px; width: 120px; padding: 5px">
+			<li><a class="thumbnail" data-class="bg-default"><div class="bg-icon"><i class="icon-remove"></i></div></a></li>
+			<li><a class="thumbnail" data-class="bg-img"><div class="bg-icon"><i class="icon-picture"></i></div></a></li>
+			<li><a class="thumbnail" data-class="bg-transparent"><div class="transparentPattern"></div></a></li>
 			{{#backgrounds}}
 			<li><a class="thumbnail" alt="{{description}}" data-class="{{klass}}"><div class="{{klass}}"></div></a></li>
 			{{/backgrounds}}
-			<li><a class="thumbnail" data-class="bg-transparent"><div class="transparentPattern"></div></a></li>
-			<li><a class="thumbnail" data-class="bg-default"><div class="nobg"></div></a></li>
-			<li><a class="thumbnail" data-class="bg-img"><div class="bg-img"><i class="icon-picture"></i></div></a></li>
-			<li><a class="thumbnail" data-class="bg-custom"><div class="bg-custom"><i class="icon-pencil"></i></div></a></li>
+			<li><a class="thumbnail" data-class="bg-custom"><div class="bg-icon"><i class="icon-pencil"></i></div></a></li>
 		</ul>
 	</li>
 </ul>

@@ -68,13 +68,6 @@ included for legacy support of old decks with the defaultbg attribute set.
 	background-color: #C98D8D;
 }
 
-.nobg {
-	background: url(img/nobg.png);
-	background-repeat: no-repeat;
-	background-size: 24px;
-	background-position: center;
-}
-
 .themeProviders .thumbnail {
 	box-sizing: border-box;
 	height: 40px;
@@ -97,12 +90,16 @@ included for legacy support of old decks with the defaultbg attribute set.
 	transition: all 0.2s ease-in-out;
 }
 
-.themeProviders .thumbnail div.bg-custom,
-.themeProviders .thumbnail div.bg-img {
-	padding: 6px;
-}
-
 .themeProviders .thumbnail:hover div {
 	transition: all 0.2s step-start;
 	border-color: transparent;
+}
+
+.themeProviders .thumbnail div.bg-icon {
+	background: white;
+	padding: 6px;
+}
+
+.themeProviders .thumbnail:hover div.bg-icon {
+	background: #eee;
 }
