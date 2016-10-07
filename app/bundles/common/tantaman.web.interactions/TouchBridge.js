@@ -1,6 +1,4 @@
 define(function() {
-	var touchSupported = 'ontouchend' in document;
-
 	function updateTouch(e) {
 		var touch = e.originalEvent.changedTouches[0];
 		for (var i in touch) {
@@ -25,7 +23,7 @@ define(function() {
 	6. fire dbl click if within delta
 	*/
 	var dblDelta = 250;
-	function createDoubleTapHandler(element, handler) {
+	function createDoubleTapHandler(handler) {
 		handler = wrap(handler);
 		var initialTouch;
 		var touchTime;
@@ -51,99 +49,31 @@ define(function() {
 			}
 		}
 	}
+	
+	function makeRegisterer(clickEvent, touchEvent, wrapper) {
+		return function(element, handler) {
+			var wrappedHandler = wrapper(handler);
+
+			element.on(clickEvent, handler);
+			element.on(touchEvent, wrappedHandler);
+
+			return function() {
+				element.on(clickEvent, handler);
+				element.on(touchEvent, wrappedHandler);
+			}
+		};
+	}
 
 	var ons = {
-		dblclick: function(element, handler) {
-			var event;
-			if (touchSupported) {
-				event = 'touchstart';
-				handler = createDoubleTapHandler(element, handler);
-			} else {
-				event = 'dblclick';
-			}
-
-			element.on(event, handler);
-			return function() {
-				element.off(event, handler);
-			}
-		},
-
-		mousedown: function(element, handler) {
-			var event;
-			if (touchSupported) {
-				event = 'touchstart';
-				handler = wrap(handler);
-			} else {
-				event = 'mousedown';
-			}
-
-			element.on(event, handler);
-			return function() {
-				element.off(event, handler);
-			};
-		},
-
-		mouseup: function(element, handler) {
-			var event;
-			if (touchSupported) {
-				event = 'touchend';
-				handler = wrap(handler);
-			} else {
-				event = 'mouseup';
-			}
-
-			element.on(event, handler);
-			return function() {
-				element.off(event, handler);
-			};
-		},
-
-		mousemove: function(element, handler) {
-			var event;
-			if (touchSupported) {
-				event = 'touchmove';
-				handler = wrap(handler);
-			} else {
-				event = 'mousemove';
-			}
-
-			element.on(event, handler);
-			return function() {
-				element.off(event, handler);
-			};
-		}
+		dblclick: makeRegisterer('dblclick', 'touchstart', createDoubleTapHandler),
+		mousedown: makeRegisterer('mousedown', 'touchstart', wrap),
+		mousemove: makeRegisterer('mousemove', 'touchmove', wrap),
+		mouseup: makeRegisterer('mouseup', 'touchend', wrap)
 
 		// TODO: selection + edit event...
 	};
 
-	var offs = {
-		mousedown: function(element, handler) {
-			if (touchSupported) {
-				element.off('touchstart', handler);
-			} else {
-				element.off('mousedown', handler);
-			}
-		},
-
-		mouseup: function(element, handler) {
-			if (touchSupported) {
-				element.off('touchend', handler);
-			} else {
-				element.off('mouseup', handler);
-			}
-		},
-
-		mousemove: function(element, handler) {
-			if (touchSupported) {
-				element.off('touchmove', handler);
-			} else {
-				element.off('mousemove', handler);
-			}
-		}
-	};
-
 	return {
-		on: ons,
-		off: offs
+		on: ons
 	};
 });
