@@ -154,6 +154,7 @@ define(['libs/backbone'], function(Backbone) {
         var hex = '333';
         $colorChooser.spectrum({
           color: '#' + hex,
+          preferredFormat: 'hex',
           showSelectionPalette: true,
           localStorageKey: 'strut.colorChooser',
           showPalette: true,

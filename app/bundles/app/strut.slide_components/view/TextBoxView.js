@@ -146,7 +146,7 @@ define(["./ComponentView", "libs/etch",
 			 * @param {Event} e
 			 */
 			mouseup: function(e) {
-				if (this.editing) {
+				if (this.editing && !$(e.target).closest('.sp-container').length) {
 					etch.triggerCaret();
 					//etch.editableInit.call(this, e, this.model.get("y") * this.dragScale + 35);
 				}

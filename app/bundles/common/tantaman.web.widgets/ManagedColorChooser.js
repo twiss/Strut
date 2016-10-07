@@ -5,6 +5,7 @@ function(Backbone, Utils) {
 
 	var defaults = {
 		color: '#000',
+		preferredFormat: 'hex',
 		showSelectionPalette: true,
 		localStorageKey: 'strut.colorChooser',
 		showPalette: true,

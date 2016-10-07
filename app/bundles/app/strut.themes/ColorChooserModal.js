@@ -41,6 +41,7 @@ function(Backbone) {
 			this._$colorChooser = this.$el.find('.color-chooser');
 			this._$colorChooser.spectrum({
 				color: this._color,
+				preferredFormat: 'hex',
 				showSelectionPalette: true,
           		localStorageKey: 'strut.colorChooser',
           		showPalette: true,
