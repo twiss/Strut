@@ -20,6 +20,8 @@ function(EditorView, EditorModel) {
     					console.log(err.stack);
     				}
     			});
+    		} else {
+    			model.newPresentation();
     		}
 		}
 	};
