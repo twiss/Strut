@@ -111,6 +111,18 @@
 	font-size: 18px;
 }
 
+.component:not(.transitionSlideSnapshot) .positioningCtrls {
+	bottom: auto;
+	top: -40px;
+	pointer-events: none;
+	left: -10px;
+	transition: opacity .2s ease-in-out;
+}
+
+.component:not(.transitionSlideSnapshot):not(.dragged) .positioningCtrls {
+	opacity: 0;
+}
+
 .component input {
 	width: 25px;
 	height: 12px;
