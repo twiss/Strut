@@ -62,9 +62,9 @@ define(["./ComponentView", './Mixers'],
 			 */
 			initialize: function() {
 				ComponentView.prototype.initialize.apply(this, arguments);
-				this.scale = Mixers.scaleObjectEmbed;
+				this.scale = Mixers.scaleByResize;
 				this.model.off("change:scale", this._setUpdatedTransform, this);
-				this.model.on("change:scale", Mixers.scaleChangeObjectEmbed, this);
+				this.model.on("change:scale", Mixers.scaleChangeByResize, this);
 			},
 
 			/**
@@ -75,21 +75,33 @@ define(["./ComponentView", './Mixers'],
 			render: function() {
 				var object, scale;
 				ComponentView.prototype.render.call(this);
-				object = '<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/' + this.model.get('shortSrc') + '&hl=en&fs=1"><param name="allowFullScreen" value="true"><embed src="http://www.youtube.com/v/' + this.model.get('shortSrc') + '&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></object>';
+				object = '<object><param name="movie" value="http://www.youtube.com/v/' + this.model.get('shortSrc') + '&hl=en&fs=1"><param name="allowFullScreen" value="true"><embed src="http://www.youtube.com/v/' + this.model.get('shortSrc') + '&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true"></object>';
 				this.$object = $(object);
 				this.$embed = this.$object.find('embed');
 				scale = this.model.get("scale");
-				if (scale && scale.width) {
-					this.$object.attr(scale);
-					this.$embed.attr(scale);
-				} else {
-					this.model.attributes.scale = {
+				if (!scale || !scale.width) {
+					scale = {
 						width: 425,
 						height: 344
 					};
+					this.model.attributes.scale = scale;
+					this.origSize = scale;
 				}
+				this._scale(scale);
 				this.$el.find('.content').append(this.$object);
 				return this.$el;
+			},
+
+			/**
+			 * Scale component
+			 *
+			 * @param {Object} scale
+			 * @param {number} scale.width
+			 * @param {number} scale.height
+			 */
+			_scale: function(scale) {
+				this.$object.attr(scale);
+				this.$embed.attr(scale);
 			}
 		});
 

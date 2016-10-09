@@ -10,9 +10,9 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 
 		initialize: function() {
 			ComponentView.prototype.initialize.apply(this, arguments);
-			this.scale = Mixers.scaleObjectEmbed;
+			this.scale = Mixers.scaleByResize;
 			this.model.off('change:scale', this._setUpdatedTransform, this);
-			this.model.on('change:scale', Mixers.scaleChangeInlineSvg, this);
+			this.model.on('change:scale', Mixers.scaleChangeByResize, this);
 
 			this.model.on('change:fill', this._fillChanged, this);
 			this._updateFill = this._updateFill.bind(this);
@@ -42,22 +42,32 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 			$content.append($('<div class="overlay"></div>'));
 
 			this._$colorPreview = this.$el.find('.sp-preview-inner');
-			if (scale && scale.width) {
-				this.$object.attr(scale);
-			} else {
+			if (!scale || !scale.width) {
 				scale = {
 					width: 100,
 					height: 100
 				};
 				this.model.attributes.scale = scale;
-				this.$object.attr(scale);
+				this.origSize = scale;
 			}
+			this._scale(scale);
 
 			var fill = this.model.get('fill');
 			if (fill)
 				this.$object.attr('fill', fill);
 
 			return this.$el;
+		},
+
+		/**
+		 * Scale component
+		 *
+		 * @param {Object} scale
+		 * @param {number} scale.width
+		 * @param {number} scale.height
+		 */
+		_scale: function(scale) {
+			this.$object.attr(scale);
 		},
 
 		_xChanged: function(model, value) {

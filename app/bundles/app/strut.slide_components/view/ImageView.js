@@ -92,6 +92,17 @@ define(["./ComponentView", './Mixers'],
 					$img.parent().addClass("svg");
 					return $img.parent().parent().addClass("svg");
 				}
+			},
+
+			/**
+			 * Scale component
+			 *
+			 * @param {Object} scale
+			 * @param {number} scale.width
+			 * @param {number} scale.height
+			 */
+			_scale: function(scale) {
+				this.$el.css(scale);
 			}
 		});
 	});
