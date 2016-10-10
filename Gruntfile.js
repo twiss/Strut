@@ -221,6 +221,16 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        airbornos: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>',
+                    src: 'scripts/{,*/}*.js',
+                    dest: '<%= yeoman.dist %>'
+                }]
+            }
+        },
         copy: {
             dist: {
                 files: [{
