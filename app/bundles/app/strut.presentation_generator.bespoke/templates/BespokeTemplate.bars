@@ -8,8 +8,10 @@
 	{{/customBackgrounds.attributes.bgs}}
 	</style>
 	{{> PerSlideSurfaceStylesheet}}
-	<div id="main" class="{{#isBGClass surface}}{{surface}} {{/isBGClass}}strut-surface {{cannedTransition}}">
-		<article class="innerBg">
+	<div id="main" class="strut-surface {{cannedTransition}}">
+		<div class="bg prevBg"></div>
+		<div class="bg currentBg"></div>
+		<article>
 			{{#slides.models}}
 				{{#attributes}}
 					<section class="{{#determineBG .. ../../..}}{{/determineBG}} slideContainer strut-slide-{{index}}" style="width: 1024px; height: 768px;" data-bespoke-state="strut-slide-{{index}}{{#determineSurface .. ../../..}}{{/determineSurface}}">

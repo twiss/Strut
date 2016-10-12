@@ -58,18 +58,21 @@
 (function(bespoke) {
 
 	bespoke.plugins.state = function(deck) {
-		var modifyState = function(method, event) {
-			var attr = event.slide.getAttribute('data-bespoke-state');
-
-			if (attr) {
-				attr.split(' ').forEach(function(state) {
-					state && deck.parent.classList[method](state);
-				});
-			}
-		};
-
-		deck.on('activate', modifyState.bind(null, 'add'));
-		deck.on('deactivate', modifyState.bind(null, 'remove'));
+		var currentBg = document.querySelector('.currentBg');
+		var prevBg = document.querySelector('.prevBg');
+		
+		deck.on('deactivate', function(event) {
+			prevBg.className = 'bg prevBg ' + event.slide.getAttribute('data-bespoke-state');
+		});
+		
+		deck.on('activate', function(event) {
+			currentBg.className = 'bg currentBg ' + event.slide.getAttribute('data-bespoke-state');
+			
+			/* Re-trigger CSS background animation */
+			currentBg.classList.remove('fadein');
+			void currentBg.offsetWidth;
+			currentBg.classList.add('fadein');
+		});
 	};
 
 }(bespoke));

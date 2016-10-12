@@ -3,7 +3,8 @@ if (window.presStarted)
     return;
 window.presStarted = true;
 
-var innerBg = document.querySelector('.innerBg');
+var currentBg = document.querySelector('.currentBg');
+var prevBg = document.querySelector('.prevBg');
 
 /**
  * impress.js
@@ -452,23 +453,19 @@ var innerBg = document.querySelector('.innerBg');
             window.scrollTo(0, 0);
             
             var step = stepsData["impress-" + el.id];
-
-            function updateSurface(step, operation) {
-                var state = step.dataset.state;
-                if (typeof state == 'string') {
-                    state = state.trim().split(' ');
-                    for (var i = 0; i < state.length; ++i) {
-                        innerBg.classList[operation](state[i]);
-                    }
-                }
-            }
             
             if ( activeStep ) {
                 activeStep.classList.remove("active");
-                updateSurface(activeStep, 'remove');
+                prevBg.className = 'bg prevBg ' + activeStep.dataset.state;
             }
             el.classList.add("active");
-            updateSurface(el, 'add');
+            currentBg.className = 'bg currentBg ' + el.dataset.state;
+            
+            /* Re-trigger CSS background animation */
+            currentBg.classList.remove("fadein");
+            void currentBg.offsetWidth;
+            currentBg.classList.add("fadein");
+            
             
             // compute target state of the canvas based on given step
             var target = {

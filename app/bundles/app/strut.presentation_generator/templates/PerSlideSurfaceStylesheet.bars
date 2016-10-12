@@ -1,6 +1,7 @@
 <style>
 {{#isBGImg surface}}
-	.strut-surface {
+	.currentBg:not([class*=" bg-surf-"]),
+	.prevBg:not([class*=" bg-surf-"]) {
 		{{#getBGImgStyle surface}}{{/getBGImgStyle}}
 	}
 {{/isBGImg}}
