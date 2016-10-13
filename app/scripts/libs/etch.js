@@ -152,6 +152,7 @@ define(['libs/backbone'], function(Backbone) {
       var $colorChooser = this.$el.find(".color-chooser");
       if ($colorChooser.length > 0) {
         var hex = '333';
+        var _this = this;
         $colorChooser.spectrum({
           color: '#' + hex,
           preferredFormat: 'hex',
@@ -167,6 +168,9 @@ define(['libs/backbone'], function(Backbone) {
             // $colorChooser.find("div").css("backgroundColor", "#" + hex);
             //view.model.get('editableModel').set('color', hex)
             document.execCommand('foreColor', false, color.toHexString());
+            
+            // Set bullet colors
+            _this._setListBulletAndTextColors();
           },
           change: function(color) {
             Backbone.trigger('etch:state', {
@@ -304,12 +308,41 @@ define(['libs/backbone'], function(Backbone) {
 
     toggleUnorderedList: function(e) {
       e.preventDefault();
+      var color = document.queryCommandValue('foreColor');
       document.execCommand('insertUnorderedList', false, null);
+      this._setListBulletAndTextColors(color);
     },
 
     toggleOrderedList: function(e){
       e.preventDefault();
+      var color = document.queryCommandValue('foreColor');
       document.execCommand('insertOrderedList', false, null);
+      this._setListBulletAndTextColors(color);
+    },
+
+    _setListBulletAndTextColors: function(textColor) {
+      var sel = window.getSelection();
+      var range = sel.getRangeAt(0);
+      $(range.commonAncestorContainer).closest('ul, ol').find('li').each(function(i, li) {
+        var range = document.createRange();
+        range.selectNode(li);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        
+        // Chrome, for some reason, removes the formatting of the first
+        // span in a li when creating it, notably the color. We restore
+        // it to the color the selected text was previous to creating
+        // the list. This has plenty of edge cases in which it won't
+        // work, but it covers the basic case.
+        if(textColor && navigator.userAgent.indexOf('Chrome') !== -1) {
+          document.execCommand('foreColor', false, textColor);
+        }
+        
+        // Set bullet color to the color of the first text in it
+        $(li).css('color', document.queryCommandValue('foreColor'));
+      });
+      sel.removeAllRanges();
+      range && sel.addRange(range);
     },
         
     justifyLeft: function(e) {
@@ -418,10 +451,8 @@ define(['libs/backbone'], function(Backbone) {
         $editor.css("display", "block");
       }
       
-      // Firefox seems to be only browser that defaults to `StyleWithCSS == true`
-      // so we turn it off here. Plus a try..catch to avoid an error being thrown in IE8.
       try {
-        document.execCommand('StyleWithCSS', false, false);
+        document.execCommand('StyleWithCSS', false, true);
       }
       catch (err) {
         // expecting to just eat IE8 error, but if different error, rethrow

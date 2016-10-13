@@ -6,14 +6,14 @@ define(['strut/deck/Component'],
 			if (!attrs)
 				return 'Text';
 			else {
-				var text = '<font';
+				var text = '<span style="';
 				for (var style in attrs) {
 					if (style == 'size') continue;
 					else text += " ";
 
-					text += style + '="' + attrs[style] + '"';
+					text += style + ': ' + attrs[style] + ';';
 				}
-				return text + '>Text</font>'
+				return text + '">Text</span>'
 			}
 		}
 
