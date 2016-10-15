@@ -80,7 +80,7 @@ define(["strut/slide_components/view/ThreeDRotatableComponentView",
 			 * React on slide scale transition change.
 			 */
 			_impScaleChanged: function() {
-				var scaleFactor = this.model.get('impScale') | 0;
+				var scaleFactor = this.model.get('impScale');
 				var $content = this.$el.find('.content');
 				var width = overviewSize.width * scaleFactor;
 				var height = overviewSize.height * scaleFactor;
