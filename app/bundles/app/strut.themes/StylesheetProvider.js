@@ -8,9 +8,35 @@ function(CodeEditor, Button, CssManip, empty, preProcessor, cssmode) {
 	var cssEditor = new CodeEditor({
 			class: 'stylesheetEditor',
 			title: 'Edit CSS',
-			placeholder: "/*.example {\n" +
-						 "\tborder: 4px groove orange;\n" +
-						 "}*/",
+			placeholder: [
+				'', '', '', '', '',
+				'/* EXAMPLES. ↑ COPY AND PASTE ABOVE HERE TO USE! ↑',
+				' *',
+				' * 1. Give images rounded corners: ',
+				' * (Increase or decrease the number to make the corners more or less rounded.)',
+				'',
+				'img {',
+				'	border-radius: 10px;',
+				'}',
+				'',
+				' * 2. Give some elements an orange border:',
+				' * (Select an element, click "+ Class", and enter "orangeborder".)',
+				'',
+				'.orangeborder {',
+				'	border: 4px solid orange;',
+				'}',
+				'',
+				' * 3. Make some elements semi-transparent:',
+				' * (60% opaque, in this example.)',
+				' * (Select an element, click "+ Class", and enter "semitransparent".)',
+				'',
+				'.semitransparent {',
+				'	opacity: 0.6;',
+				'}',
+				'',
+				' */',
+				''
+			].join('\n'),
 			mode: 'css'
 		});
 	var sheetId = 'userStylesheet';
