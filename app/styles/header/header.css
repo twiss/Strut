@@ -18,7 +18,8 @@
 }
 
 .header .navbar {
-	margin-bottom: 0;
+	position: absolute;
+	left: 0;
 }
 
 .navbar-inner {
