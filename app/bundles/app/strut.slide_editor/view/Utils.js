@@ -8,15 +8,10 @@ define({
 
 		var slideSize = config.slide.size;
 
-		var xScale = width / slideSize.width;
-		var yScale = (height - 20) / slideSize.height;
+		var xScale = (width - 30) / slideSize.width;
+		var yScale = (height - 30) / slideSize.height;
 
-		var newHeight = slideSize.height * xScale;
-		if (newHeight > height) {
-			var scale = yScale;
-		} else {
-			var scale = xScale;
-		}
+		var scale = Math.min(xScale, yScale);
 
 		var scaledWidth = scale * slideSize.width;
 
