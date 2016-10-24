@@ -6,6 +6,17 @@
 	border-radius: 0;
 }
 
+.header .navbar-inner,
+.header .navbar-inner > ul,
+.header .navbar-inner > ul > li,
+.header .navbar-inner > ul > div {
+	display: flex;
+}
+
+.header .navbar-inner .expand {
+	flex-grow: 1;
+}
+
 .header .navbar {
 	margin-bottom: 0;
 }

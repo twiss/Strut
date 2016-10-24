@@ -12,9 +12,9 @@
 				</div>
 			</li>
 		</ul>
-		<ul class="nav theme-buttons">
+		<ul class="nav theme-buttons expand">
 		</ul>
-		<ul class="nav pull-right">
+		<ul class="nav">
 			<li class="divider-vertical">
 			</li>
 			<li class="mode-buttons">
