@@ -225,10 +225,9 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 		_resize: function() {
 			var dimensions = Utils.computeSlideDimensions(this.$el);
 			this._$slideContainer.css({
-				'margin-left': dimensions.remainingWidth / 2,
-				'margin-right': dimensions.remainingWidth / 2
+				'margin-top': dimensions.remainingHeight / 2,
+				'margin-left': dimensions.remainingWidth / 2
 			});
-
 			this._$slideContainer.css(window.browserPrefix + 'transform', 'scale(' + dimensions.scale + ')');
 		},
 

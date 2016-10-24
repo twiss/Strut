@@ -54,10 +54,10 @@ function(managedEditors, md, Utils) {
 
 		_resize: function() {
 			var dimensions = Utils.computeSlideDimensions(this._opts.$target);
-			editor.mirror.setSize(dimensions.scaledWidth, this._opts.$target.height() - 20);
+			editor.mirror.setSize(dimensions.scaledWidth, dimensions.scaledHeight);
 			this.$el.css({
-				'margin-left': dimensions.remainingWidth / 2,
-				'margin-right': dimensions.remainingWidth / 2
+				'margin-top': dimensions.remainingHeight / 2,
+				'margin-left': dimensions.remainingWidth / 2
 			});
 		},
 
