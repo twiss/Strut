@@ -15,7 +15,7 @@ function(Backbone, Archiver, lang) {
 			var $ok = this._$modal.find('.ok');
 			//this._makeDownloadable($ok);
 
-			$ok.html('');
+			$ok.hide();
 			$container.append(this.$el);
 		},
 

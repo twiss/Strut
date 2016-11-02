@@ -4,14 +4,14 @@ function(Backbone, FileUtils, lang) {
 
 	return Backbone.View.extend({
 		initialize: function() {
-			this.name = 'JSON';
+			this.name = 'HTML';
 			this._rendered = false;
 			/*
 			TODO: handle browsers that can't do the download attribute.  Safari?
 			*/
 			this._dlSupported = window.dlSupported;
 
-			this.$el.html('<div class="alert alert-info">' + lang.exporter_json + '</div>');
+			this.$el.html('<div class="alert alert-info">' + lang.exporter_html + '</div>');
 			if (this._dlSupported) {
 				this.$el.append('<div class="alert alert-success">' + lang.click_below + '</div>');
 			}
@@ -20,24 +20,42 @@ function(Backbone, FileUtils, lang) {
 		show: function($container, $modal) {
 			this._$modal = $modal;
 			var $ok = this._$modal.find('.ok');
-			if (this._dlSupported) {
-				$ok.show().html('<i class="icon-download-alt icon-white"></i>');
-				this._makeDownloadable($ok);
-			} else {
-				$ok.hide();
-				if (window.hasFlash)
-					this._populateDownloadify();
-				else
-					this._populateTextArea();
-			}
+			$ok.hide();
+
+			this._exportAsHTML((function(html) {
+				if (this._dlSupported) {
+					$ok.show().html('<i class="icon-download-alt icon-white"></i>');
+					this._makeDownloadable($ok, html);
+				} else {
+					if (window.hasFlash)
+						this._populateDownloadify(html);
+					else
+						this._populateTextArea(html);
+				}
+			}).bind(this));
 
 			$container.append(this.$el);
 		},
 
-		_makeDownloadable: function($ok) {
-			var attrs = FileUtils.createDownloadAttrs('application\/json',
-				JSON.stringify(this._exportable.export(), null, 2),
-				this._exportable.identifier() + '.json');
+		_exportAsHTML: function(callback) {
+			this._editorModel.trigger('launch:preview', null);
+
+			var generator = this._editorModel.get('generator');
+
+			var previewStr = generator.generate(this._editorModel.deck());
+
+			localStorage.setItem('preview-string', previewStr);
+			localStorage.setItem('preview-config', JSON.stringify({
+				surface: this._editorModel.deck().get('surface')
+			}));
+
+			airborn.fs.prepareFile('/Apps/strut/dist/preview_export/' + generator.id + '.html', {rootParent: '/Apps/strut/', relativeParent: '/Apps/strut/dist/', appData: '/AppData/strut/', bootstrap: false, selfContained: true}, callback);
+		},
+
+		_makeDownloadable: function($ok, html) {
+			var attrs = FileUtils.createDownloadAttrs('text\/html',
+				html,
+				this._exportable.identifier() + '.html');
 
 			var a = $ok[0];
 			a.download = attrs.download
@@ -45,14 +63,14 @@ function(Backbone, FileUtils, lang) {
 			a.dataset.downloadurl = attrs.downloadurl
 		},
 
-		_populateTextArea: function() {
+		_populateTextArea: function(html) {
 			var $txt = this.$el.find('textarea');
 			if ($txt.length == 0) {
 				$txt = $('<textarea style="width: 500px; height: 200px;"></textarea>');
 				this.$el.append($txt);
 			}
 
-			$txt.val(JSON.stringify(this._exportable.export()));
+			$txt.val(html);
 		},
 
 		_populateDownloadify: function() {
@@ -65,10 +83,10 @@ function(Backbone, FileUtils, lang) {
 				setTimeout(function() {
 					Downloadify.create($dlify[0], {
 					    filename: function(){
-					      return self._exportable.identifier() + '.json';
+					      return self._exportable.identifier() + '.html';
 					    },
 					    data: function(){ 
-					      return JSON.stringify(self._exportable.export(), null, 2);
+					      return html;
 					    },
 					    onComplete: function(){ 
 					       
@@ -109,8 +127,9 @@ function(Backbone, FileUtils, lang) {
 			// anything really to render?
 		},
 
-		constructor: function JsonExportView(exportable) {
+		constructor: function HTMLExportView(exportable) {
 			this._exportable = exportable;
+			this._editorModel = exportable.adapted;
 			Backbone.View.prototype.constructor.call(this);
 		}
 	});

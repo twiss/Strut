@@ -28,10 +28,9 @@ define({
 	invisible: 'Невидимый',
 	reset: 'Сброс',
 	go: 'Вперёд',
-	strut_exporter_json: {
-		explain: 'Здесь можно скачать файл, который при необходимости можно будет импортировать в Strut.',
-		click_below: 'Для этого нажмите ниже.'
-	},
+	exporter_json: 'Здесь можно скачать файл, который при необходимости можно будет импортировать в Strut.',
+	exporter_html: 'Save a file on your computer with which you can start the presentation without an Internet connection.',
+	click_below: 'Для этого нажмите ниже.',
 	background: 'Фон',
 	foreground: 'Foreground',
 	present: 'Present'

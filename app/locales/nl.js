@@ -28,10 +28,9 @@ define({
 	invisible: 'Onzichtbaar',
 	reset: 'Terugzetten',
 	go: 'Gaan',
-	strut_exporter_json: {
-		explain: 'Deze functie maakt het mogelijk om een bestand op te slaan, welke later weer in Strut geïmporteerd kan worden.',
-		click_below: 'Klik hieronder om te downloaden'
-	},
+	exporter_json: 'Deze functie maakt het mogelijk om een bestand op te slaan, welke later weer in Strut geïmporteerd kan worden.',
+	exporter_html: 'Sla een bestand op waarmee u de presentatie zonder internetverbinding op kan starten.',
+	click_below: 'Klik hieronder om te downloaden',
 	background: 'Achtergrond',
 	foreground: 'Voorgrond',
 	present: 'Presenteren'

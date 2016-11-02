@@ -31,6 +31,7 @@ require.config({
     	'strut/exporter/zip/browser': '../bundles/app/strut.exporter.zip.browser',
     	'strut/exporter': '../bundles/app/strut.exporter',
     	'strut/exporter/json': '../bundles/app/strut.exporter.json',
+    	'strut/exporter/html/airborn': '../bundles/app/strut.exporter.html.airborn',
     	'strut/header': '../bundles/app/strut.header',
     	'strut/importer': '../bundles/app/strut.importer',
     	'strut/importer/json': '../bundles/app/strut.importer.json',

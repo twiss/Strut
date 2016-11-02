@@ -28,10 +28,9 @@ define({
 	invisible: 'Invisible',
 	reset: 'Réinitialiser',
 	go: 'Aller',
-	strut_exporter_json: {
-		explain: 'Vous pouvez sauvegarder la présentation dans fichier que vous pourrez réimporter dans Strut plus tard',
-		click_below: 'Cliquer ci-dessous pour télécharger le fichier'
-	},
+	exporter_json: 'Vous pouvez sauvegarder la présentation dans fichier que vous pourrez réimporter dans Strut plus tard',
+	exporter_html: 'Save a file on your computer with which you can start the presentation without an Internet connection.',
+	click_below: 'Cliquer ci-dessous pour télécharger le fichier',
 	background: 'Fond',
 	foreground: 'Foreground',
 	present: 'Present'

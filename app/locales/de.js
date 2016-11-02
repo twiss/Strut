@@ -28,10 +28,9 @@ define({
 	invisible: 'Unsichtbar',
 	reset: 'Zurücksetzen',
 	go: 'Gehe',
-	strut_exporter_json: {
-		explain: 'Dies erlaubt Ihnen, eine Datei auf Ihrem Computer zu speichern, die Sie später wieder in Strut importieren können.',
-		click_below: 'Klicken sie zum Herunterladen auf das Symbol unten'
-	},
+	exporter_json: 'Dies erlaubt Ihnen, eine Datei auf Ihrem Computer zu speichern, die Sie später wieder in Strut importieren können.',
+	exporter_html: 'Save a file on your computer with which you can start the presentation without an Internet connection.',
+	click_below: 'Klicken sie zum Herunterladen auf das Symbol unten',
 	background: 'Hintergrund',
 	foreground: 'Vordergrund',
 	present: 'Present'

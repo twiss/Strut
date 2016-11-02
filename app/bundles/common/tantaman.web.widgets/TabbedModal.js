@@ -39,7 +39,9 @@ function(Backbone) {
 
 			this.__providerSelected(this.__currentProvider, e);
 
-			this.__currentProvider.show(this.$tabContent, this.$el);
+			if(e.type) { // Don't call show() the first time we select the first provider
+				this.__currentProvider.show(this.$tabContent, this.$el);
+			}
 		},
 
 		__providerSelected: function(provider, e) {

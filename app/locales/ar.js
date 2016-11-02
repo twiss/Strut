@@ -28,10 +28,9 @@ define({
 	invisible: 'غير مرئي',
 	reset: 'إعادة تعيين',
 	go: 'انطلِق',
-	strut_exporter_json: {
-		explain: 'سيمكنك هذا الخيار من حفظ ملف بجهازك بحيث يمكنك استيراده لمحرر ستروت لاحقاً',
-		click_below: 'اضغط بالأسفل للتحميل'
-	},
+	exporter_json: 'سيمكنك هذا الخيار من حفظ ملف بجهازك بحيث يمكنك استيراده لمحرر ستروت لاحقاً',
+	exporter_html: 'Save a file on your computer with which you can start the presentation without an Internet connection.',
+	click_below: 'اضغط بالأسفل للتحميل',
 	background: 'خلفية',
 	foreground: 'Foreground',
 	present: 'Present'
