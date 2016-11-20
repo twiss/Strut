@@ -49,7 +49,34 @@ function(Backbone, FileUtils, lang) {
 				surface: this._editorModel.deck().get('surface')
 			}));
 
-			airborn.fs.prepareFile('/Apps/strut/dist/preview_export/' + generator.id + '.html', {rootParent: '/Apps/strut/', relativeParent: '/Apps/strut/dist/', appData: '/AppData/strut/', bootstrap: false, selfContained: true}, callback);
+			airborn.fs.prepareFile(
+				'/Apps/strut/dist/preview_export/' + generator.id + '.html',
+				{
+					rootParent: '/Apps/strut/',
+					relativeParent: '/Apps/strut/dist/',
+					appData: '/AppData/strut/',
+					bootstrap: false,
+					selfContained: true
+				},
+				function(contents) {
+					/* This is a hack. We do a second pass of
+					 * prepareString() over the result of prepareURL(),
+					 * to prepare the contents of localStorage (which
+					 * can contain airbornstorage: URLs).
+					 */
+					airborn.fs.prepareString(
+						contents.replace(/<img src=\\"(airbornstorage:[^"]*)\\">/g, '<img src="$1">'),
+						{
+							rootParent: '/Apps/strut/',
+							relativeParent: '/Apps/strut/dist/',
+							selfContained: true
+						},
+						function(contents) {
+							callback(contents.replace(/<img src="(data:image\/png;filename=%2FPictures%2F[^"]*)">/g, '<img src=\\"$1\\">'))
+						}
+					);
+				}
+			);
 		},
 
 		_makeDownloadable: function($ok, html) {

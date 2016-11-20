@@ -1,11 +1,10 @@
 /*
 @author Matt Crinklaw-Vogt
 */
-define(['libs/backbone', 'libs/imgup'],
-function(Backbone, Imgup) {
+define(['libs/backbone'],
+function(Backbone) {
 	var modalCache = {};
 	var reg = /[a-z]+:/;
-	var imgup = new Imgup('847de02274cba30');
 
 	var ignoredVals = {
 		'http:': true,
@@ -28,6 +27,7 @@ function(Backbone, Imgup) {
 		},
 		initialize: function() {
 			this.loadItem = _.debounce(this.loadItem.bind(this), 200);
+			this.storage = navigator.getDeviceStorage('pictures');
 		},
 		show: function(cb) {
 			this.cb = cb;
@@ -48,20 +48,37 @@ function(Backbone, Imgup) {
 
 			this._switchToProgress();
 			this.item.src = '';
-
-			imgup.upload(f).progress(function(ratio) {
-				_this._updateProgress(ratio);
-			}).then(function(result) {
-				_this._switchToThumbnail();
-				_this.$input.val(result.data.link);
-				_this.urlChanged({
-					which: -1
+			
+			var storage = this.storage;
+			var name = f.name;
+			var i = 0;
+			
+			(function upload() {
+				var dspath = 'Presentation Images/' + name;
+				var airbornpath = 'airbornstorage:/Pictures/' + dspath;
+				var req = storage.addNamed(f, dspath);
+				
+				req.addEventListener('success', function() {
+					airborn.fs.getObjectLocation(airbornpath, function(loc) {
+						_this._switchToThumbnail();
+						_this.$input.val(airbornpath + '?hmac=' + loc.object);
+						_this.urlChanged({
+							which: -1
+						});
+					});
 				});
-			}, function() {
-				_this._updateProgress(0);
-				_this._switchToThumbnail();
-				_this.$input.val('Failed to upload image to imgur');
-			});
+				
+				req.addEventListener('error', function() {
+					if(req.error.name === 'NoModificationAllowedError') {
+						name = f.name.replace(/(\/|\.\w+)?$/, ' (' + (++i) + ')$&');
+						upload();
+					} else {
+						_this._updateProgress(0);
+						_this._switchToThumbnail();
+						_this.$input.val('Failed to upload image');
+					}
+				});
+			})();
 
 			
 			// reader = new FileReader();
@@ -101,8 +118,7 @@ function(Backbone, Imgup) {
 				val = 'http://' + val;
 			}
 
-			this.item.src = val;
-			return this.src = this.item.src;
+			return this.src = this.item.src = val;
 		},
 		_itemLoadError: function() {
 			this.$el.find(".ok").addClass("disabled");

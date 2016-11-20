@@ -9,5 +9,12 @@
 		"128": "dist/styles/img/strut-touch.png"
 	},
 	"launch_path": "/dist/index.html",
+	"permissions": {
+		"device-storage:pictures": {
+			"description": "Required for adding images.",
+			"access": "readcreate"
+		},
+		"get-object-locations": {}
+	},
 	"window_size": "maximize"
 }
