@@ -9,7 +9,7 @@
 	</div>
 	<h4>URL:</h4><div class="form-inline"><input type="text" name="itemUrl"></input>&nbsp;{{#browsable}}<div data-option="browse" class="btn">Browse</div>
 	{{/browsable}}</div>
-	<input type="file" style="display:none"></input>
+	<input type="file" style="display:none" accept="{{accept}}"></input>
 	<h4>Preview:</h4>
 	<ul class="thumbnails">
 		<li class="span4">

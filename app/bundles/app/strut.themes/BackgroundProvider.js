@@ -31,7 +31,8 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 		name: lang.image,
 		title: lang.insert_image,
 		icon: 'icon-picture',
-		browsable: true
+		browsable: true,
+		accept: 'image/*'
 	});
 	var colorChooserModal = new ColorChooserModal();
 	colorChooserModal.render();
