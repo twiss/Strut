@@ -48,9 +48,7 @@ define(["./ComponentView", "libs/etch",
 				this.dblclicked = this.dblclicked.bind(this);
 				TouchBridge.on.dblclick(this.$el, this.dblclicked);
 
-				// TODO This can be uncommented once modal windows start blocking all slide key events.
-				// https://github.com/tantaman/Strut/pull/183
-				// $(document).bind("keydown", this.keydown);
+				$(document).bind("keydown", this.keydown);
 
 				this.model.on("edit", this.edit, this);
 			},
@@ -91,8 +89,7 @@ define(["./ComponentView", "libs/etch",
 			 */
 			remove: function(disposeModel) {
 				ComponentView.prototype.remove.apply(this, arguments);
-				// TODO This can be uncommented once modal windows start blocking all slide key events.
-				// $(document).unbind("keydown", this.keydown);
+				$(document).unbind("keydown", this.keydown);
 			},
 
 			/**
@@ -160,11 +157,23 @@ define(["./ComponentView", "libs/etch",
 			 * @param {Event} e
 			 */
 			keydown: function(e) {
+				// TODO This can be uncommented once modal windows start blocking all slide key events.
+				// https://github.com/tantaman/Strut/pull/183
+				
 				// When user starts typing text in selected textbox, open edit mode immediately.
-				if (this.model.get("selected") && !this.editing) {
+				/*if (this.model.get("selected") && !this.editing) {
 					if (!e.ctrlKey && !e.altKey && !e.metaKey && String.fromCharCode(e.which).match(/[\w]/)) {
 						this.edit();
 					}
+				}*/
+				
+				if(this.editing && e.which === 9) { // Tab
+					if(e.shiftKey) {
+						document.execCommand('outdent');
+					} else {
+						document.execCommand('indent');
+					}
+					e.preventDefault();
 				}
 			},
 
