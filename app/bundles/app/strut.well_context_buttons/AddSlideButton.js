@@ -1,17 +1,26 @@
 define(['libs/backbone'],
 function(Backbone) {
 	return Backbone.View.extend({
-		className: 'addBtn btn btn-success',
+		className: 'btn-group',
 		events: {
-			click: "_addSlide"
+			'click .addBtn': '_addSlide',
+			'click .option': '_addSlideOption'
+		},
+		
+		initialize: function() {
+			this._template = JST['strut.well_context_buttons/AddSlideButton'];
 		},
 
 		_addSlide: function() {
-			this._editorModel.addSlide(this._wellMenuModel.slideIndex());
+			this._editorModel.addSlide(null, this._wellMenuModel.slideIndex());
+		},
+
+		_addSlideOption: function(evt) {
+			this._editorModel.addSlide(evt.currentTarget.dataset.option, this._wellMenuModel.slideIndex());
 		},
 
 		render: function() {
-			this.$el.html('<center><i class="icon-plus icon-white"></i></center>');
+			this.$el.html(this._template(this._generators));
 			return this;
 		},
 

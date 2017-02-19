@@ -296,8 +296,11 @@ define(["libs/backbone",
 				this.off();
 			},
 
-			constructor: function Slide() {
+			constructor: function Slide(template) {
 				SpatialObject.prototype.constructor.apply(this, arguments);
+				//if (template) {
+				//	this.set('components', );
+				//}
 			}
 		});
 	});

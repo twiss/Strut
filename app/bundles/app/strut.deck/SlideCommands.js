@@ -7,7 +7,7 @@ define(['strut/deck/Slide'], function(Slide) {
 	/**
 	 * @class SlideCommands.Paste
 	 * @param {Deck} deck
-	 * @param {Slide|Slide[]} slides
+	 * @param {Slide[]} slides
 	 * @param {number} [index]
 	 * @constructor
 	 */
@@ -15,7 +15,7 @@ define(['strut/deck/Slide'], function(Slide) {
 		this.deck = deck;
 		this.selected = this.deck.selected.slice(0);
 		this.activeSlide = this.deck.get('activeSlide');
-		this.slides = slides ? slides.slice(0) : null;
+		this.slides = slides.slice(0);
 		this.index = index;
 	};
 

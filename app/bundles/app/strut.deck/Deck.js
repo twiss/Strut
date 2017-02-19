@@ -5,14 +5,16 @@
 define(["common/Calcium",
 	"./SlideCollection",
 	"./SlideCommands",
+	'./SlideTemplates',
 	'tantaman/web/undo_support/CmdListFactory',
-	'strut/deck/Slide',
+	'./Slide',
 	"strut/editor/GlobalEvents",
 	'./DeckUpgrade',
 	'./CustomBackgrounds'],
 	function(Backbone, 
 			 SlideCollection, 
 			 SlideCommands, 
+			 SlideTemplates, 
 			 CmdListFactory, 
 			 Slide, 
 			 key, 
@@ -348,14 +350,14 @@ define(["common/Calcium",
 			 *
 			 * @param index If passed, slide will be added at given index. If not, it will be added as the last slide in the deck.
 			 */
-			create: function(index) {
-				this.undoHistory.pushdo(new SlideCommands.Add(this, null, index));
+			create: function(templateName, index) {
+				this.undoHistory.pushdo(new SlideCommands.Add(this, [new Slide(SlideTemplates[templateName])], index));
 			},
 
 			/**
 			 * Adds slides to the deck. First of newly created slides is set as the active slide in the deck.
 			 *
-			 * @param {Slide|Slide[]} slides
+			 * @param {Slide[]} slides
 			 * @param {number} [index] If passed, slides will be added at this index. If not, slides will be inserted after the
 			 * last selected slide.
 			 */
@@ -367,15 +369,13 @@ define(["common/Calcium",
 			 * Callback for slide addition command.
 			 * @see SlideCommands.Add
 			 *
-			 * @param {Slide|Slide[]} slides
+			 * @param {Slide[]} slides
 			 * @param {Object} options
 			 * @private
 			 */
 			_doAdd: function(slides, options) {
 				var allSlides = this.get("slides");
 
-				slides = slides || [new Slide()];
-				slides = _.isArray(slides) ? slides : [slides];
 				options = options || {};
 
 				if (!options.preserveIndexes && this.selected.length) {

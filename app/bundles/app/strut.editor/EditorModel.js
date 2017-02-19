@@ -89,7 +89,7 @@ define(['libs/backbone',
 	        		fileName: "presentation-" + num,
 	        		slides: []
 	      		});
-				this._deck.create();
+				this.addSlide('title');
 			},
 
 			/**
@@ -146,8 +146,8 @@ define(['libs/backbone',
 				return this._deck.get('slides');
 			},
 
-			addSlide: function(index) {
-				this._deck.create(index);
+			addSlide: function(templateName, index) {
+				this._deck.create(templateName, index);
 			},
 
 			activeSlide: function() {

@@ -173,6 +173,7 @@ define(['libs/backbone',
 			// TODO Add doc (describe why this one is binded to mousemove)
 			_showContextMenu: function(e) {
 				//if (e.target != this.$el[0]) return;
+				if (this._contextMenu.isOpen()) return;
 				this._throttler.submit(this._doShowContextMenu, {
 					rejectionPolicy: 'runLast',
 					arguments: [e]

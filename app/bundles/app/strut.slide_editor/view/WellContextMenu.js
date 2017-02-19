@@ -15,6 +15,12 @@ function(Backbone, Model) {
 			this._currentPos = -1;
 		},
 
+		isOpen: function() {
+			return this.model.get('contextButtons').some(function(button) {
+				return button.$el.hasClass('open');
+			});
+		},
+
 		reposition: function(newPos) {
 			if (newPos.y == this._currentPos.y) return;
 
