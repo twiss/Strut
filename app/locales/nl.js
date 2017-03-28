@@ -32,6 +32,5 @@ define({
 	exporter_html: 'Sla een bestand op waarmee u de presentatie zonder internetverbinding op kan starten.',
 	click_below: 'Klik hieronder om te downloaden',
 	background: 'Achtergrond',
-	foreground: 'Voorgrond',
-	present: 'Presenteren'
+	foreground: 'Voorgrond'
 });

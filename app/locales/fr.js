@@ -32,6 +32,5 @@ define({
 	exporter_html: 'Save a file on your computer with which you can start the presentation without an Internet connection.',
 	click_below: 'Cliquer ci-dessous pour télécharger le fichier',
 	background: 'Fond',
-	foreground: 'Foreground',
-	present: 'Present'
+	foreground: 'Foreground'
 });
