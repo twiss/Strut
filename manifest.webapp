@@ -1,6 +1,6 @@
 {
-	"name": "Strut Presentations",
-	"description": "Presentations",
+	"name": "Presentations",
+	"description": "Strut Presentations",
 	"developer": {
 		"name": "tantaman",
 		"url": "https://github.com/tantaman"
@@ -15,6 +15,27 @@
 			"access": "readcreate"
 		},
 		"get-object-locations": {}
+	},
+	"default_locale": "en",
+	"locales": {
+		"ar": {
+			"name": "العروض"
+		},
+		"de": {
+			"name": "Präsentationen"
+		},
+		"es": {
+			"name": "Presentaciones"
+		},
+		"fr": {
+			"name": "Présentations"
+		},
+		"nl": {
+			"name": "Presentaties"
+		},
+		"ru": {
+			"name": "Презентаций"
+		}
 	},
 	"window_size": "maximize"
 }
